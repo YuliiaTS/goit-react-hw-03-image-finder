@@ -58,6 +58,11 @@ export class App extends Component {
         if (fullGallery.length + 12 === imgArray.totalHits) {
           this.setState({ status: 'idle' });
         }
+
+        if (imgArray.hits.length === 0) {
+          alert (`No images found for your request`);
+        }
+
       });
     }
   }
@@ -86,6 +91,10 @@ export class App extends Component {
       return { page: state.page + 1 };
     });
   };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
   
   render() {
     const { showModal, imageSelected, status, fullGallery } = this.state;
@@ -97,7 +106,7 @@ export class App extends Component {
           toggleModal={this.toggleModal}
         />
         {showModal && (
-          <Modal imageSelected={imageSelected} toggleModal={this.toggleModal} />
+          <Modal imageSelected={imageSelected} onClose={this.closeModal} />
         )}
         {status === 'pending' && <Loader />}
         {status === 'resolved' && <Button onButtonClick={this.onClickLoadMore} />}

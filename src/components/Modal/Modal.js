@@ -13,21 +13,22 @@ export default class Modal extends Component {
 
   onKeyEscape = e => {
     if (e.code === 'Escape') {
-      this.props.modalToggle();
+      this.props.onClose();
     }
   };
 
-  handleBackdropClick = e => {
+  onOverlayClick = e => {
     if (e.target === e.currentTarget) {
-      this.props.modalToggle();
+      this.props.onClose();
     }
-  };
+  }
+
 
   render() {
     const { largeImageURL, tags } = this.props.imageSelected;
 
     return (
-      <div className={s.Overlay} onClick={this.props.modalToggle}>
+      <div className={s.Overlay} onClick={this.onOverlayClick}>
         <div className={s.Modal}>
           <img src={largeImageURL} alt={tags} />
         </div>
@@ -36,7 +37,7 @@ export default class Modal extends Component {
   }
 }
 Modal.propTypes = {
-  modalToggle: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   imageSelected: PropTypes.shape({
     largeImageURL: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,
