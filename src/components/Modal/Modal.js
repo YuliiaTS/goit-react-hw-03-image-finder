@@ -21,8 +21,7 @@ export default class Modal extends Component {
     if (e.target === e.currentTarget) {
       this.props.onClose();
     }
-  }
-
+  };
 
   render() {
     const { largeImageURL, tags } = this.props.imageSelected;
